@@ -3,6 +3,9 @@
 Thoreau Centre for the Blockchain Arts (TCBA) is a virtual exhibition space built on Decentraland (20.62) with the objective of promoting art on the blockchain, by serving as a platform where artists can display their works outside the constraints of physicality.
 
 
+![TCBA](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/TCBAgit.png?token=AnOIgFbV6O1mOcHWTu7I1qfHiAue4iQUks5cofclwA%3D%3D)
+
+
 # The building
 
 Since the very first drafts the main shape being explored was the cube, with ideas such as 'solidity' and 'closedness' guiding the design. Given the geometric constraints of Decentraland (concerning max nr of triangles, etc) it seemed fit to merge these initial thoughts with a curveless design which is both practical and symbolically adequate.
