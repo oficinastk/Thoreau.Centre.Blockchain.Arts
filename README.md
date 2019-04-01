@@ -1,20 +1,21 @@
 # Thoreau Centre for the Blockchain Arts
 
-Thoreau Centre for the Blockchain Arts (TCBA) is a virtual exhibition space built on Decentraland with the objective of promoting art on the blockchain, by holding frequent and permanent exhibitions.
+Thoreau Centre for the Blockchain Arts (TCBA) is a virtual exhibition space built on Decentraland (20.62) with the objective of promoting art on the blockchain, by serving as a platform where artists can display their works outside the constraints of physicality.
+
 
 # The building
 
-Since the very first drafts the main shape being explored was the cube, with ideas such as 'solidity' and 'closedeness' guiding the design. Given the geometric constraints of Decentraland (concerning max nr of triangles, etc) it seemed fit to merge these initial thoughts with a curveless design which is both practical and symbolically adequate.
+Since the very first drafts the main shape being explored was the cube, with ideas such as 'solidity' and 'closedness' guiding the design. Given the geometric constraints of Decentraland (concerning max nr of triangles, etc) it seemed fit to merge these initial thoughts with a curveless design which is both practical and symbolically adequate.
 
 The small footprint of this three floored building was conceived to display works on both 2D and 3D at several scales, providing ample flexibility for the artists to display their works, while preserving a sense of proximity and intimacy. These dynamics were explored in many previous prototypes, until this closed-open space design was reached.
 
+
 # The name
 
-Henry David Thoreau was a north american writer whose ideas revolved around the concept of 'self reliance' and as this is a personal project by [Oficinas TK](https://oficinastk.github.io) (a one man crew with a 'no budget' approach) it seemed fit to honour him. 
+Henry David Thoreau was a north american writer whose ideas revolved around the concept of 'self reliance' and as this is a personal project by [Oficinas TK](https://oficinastk.github.io) (a one man crew with a 'no budget' approach) it seemed adequate to honour him. 
 
 
 # Goals
-
 
 It is in its imediate goals to promote regular exhibitions of old and new work by artists on the blockchain, as well as to arrange a permanent exhibition of 'historical' blockchain art (Rare Pepes, Cryptopunks, etc) to document this early manifestations of an emerging form of art. To both these ends, its a medium term objective to start TCBA's own collection of blockchain art by either acquiring or comissioning and minting works by new as well as established artists.
 
