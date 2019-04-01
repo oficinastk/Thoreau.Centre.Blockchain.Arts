@@ -12,6 +12,8 @@ Since the very first drafts the main shape being explored was the cube, with ide
 
 The small footprint of this three floored building was conceived to display works on both 2D and 3D at several scales, providing ample flexibility for the artists to display their works, while preserving a sense of proximity and intimacy. These dynamics were explored in many previous prototypes, until this closed-open space design was reached.
 
+*3D model [here](https://sketchfab.com/3d-models/tcba-with-visitors-e8ca61e25d4f40d7bf8bcc0c4a5e5b54)*
+
 
 # The name
 
