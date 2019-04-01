@@ -30,3 +30,10 @@ Aligned with the distric guidelines [Ⓐ 20.52](https://github.com/decentraland/
 This repo serves to hold all the info about TCBA and serve as a gateway to it, as well as to store images, 3d models and DCL scenes (cc0-1.0 license when applicable).
 
 Feel free to drop a line at **oficinastk at gmail.com** if you would like to know more about this, help or even colaborate.
+
+&nbsp;
+&nbsp;
+
+*You can easily fund this project with some ETH in a fun way, by cloning this badass bot, and getting your very own unique ERC721 bot! Check [Gittron](https://gittron.me/about) for more info on their awsome project.
+
+<table border="0"><tr>  <td><a href="https://gittron.me/bots/0x88435a2b05a5f9ad073ed00ac9e79dd8"><img src="https://s3.amazonaws.com/od-flat-svg/0x88435a2b05a5f9ad073ed00ac9e79dd8.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/0x88435a2b05a5f9ad073ed00ac9e79dd8">Give us some love with GITTRON</a></td></tr></table>
