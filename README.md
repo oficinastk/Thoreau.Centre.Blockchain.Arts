@@ -1,6 +1,6 @@
 # Thoreau Centre for the Blockchain Arts
 
-Thoreau Centre for the Blockchain Arts (TCBA) is a virtual exhibition space built on Decentraland (20.62) with the objective of promoting art on the blockchain, by serving as a platform where artists can display their works outside the constraints of physicality.
+The Thoreau Centre for the Blockchain Arts (TCBA) is a virtual exhibition space built on Decentraland (20.62) with the objective of promoting art on the blockchain, by serving as a platform where artists can display their works outside the constraints of physicality.
 
 
 ![TCBA](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/TCBAgit.png?token=AnOIgFbV6O1mOcHWTu7I1qfHiAue4iQUks5cofclwA%3D%3D)
@@ -26,16 +26,20 @@ It is in its imediate goals to promote regular exhibitions of old and new work b
 
 Aligned with the distric guidelines [Ⓐ 20.52](https://github.com/decentraland/districts/issues/18), the admitance of visitors to the TCBA will always be free and no fees will be charged to artists seeking to display their work.
 
+# TCBA Embassy
 
-*Notes*
+The TCBA Embassy was built on [Cryptovoxels](https://cryptovoxels.com) and serves as a bridge between metaverses, as well as to raise awareness about the TCBA. It is placed at [1, Monad Court](https://www.cryptovoxels.com/parcels/967), in Little Tokyo just on the outskirts of the thriving Arts District.
 
-This repo serves to hold all the info about TCBA and serve as a gateway to it, as well as to store images, 3d models and DCL scenes (cc0-1.0 license when applicable).
+
+
+
+--This repo serves to hold all the info about TCBA and serve as a gateway to it, as well as to store images, 3d models and DCL scenes (cc0-1.0 license when applicable).
 
 Feel free to drop a line at **oficinastk at gmail.com** if you would like to know more about this, help or even colaborate.
 
 &nbsp;
 &nbsp;
 
-*You can easily fund this project with some ETH in a fun way, by cloning this badass bot, and getting your very own unique ERC721 bot! Check [Gittron](https://gittron.me/about) for more info on their awesome project.
+*If you would like to support this project with some ETH, clone this badass bot, and get your very own unique ERC721 bot! Check [Gittron](https://gittron.me/about) for more info on their awesome project.
 
-<table border="0"><tr>  <td><a href="https://gittron.me/bots/0x88435a2b05a5f9ad073ed00ac9e79dd8"><img src="https://s3.amazonaws.com/od-flat-svg/0x88435a2b05a5f9ad073ed00ac9e79dd8.png" alt="gittron" width="50"/></a></td><td><a href="https://gittron.me/bots/0x88435a2b05a5f9ad073ed00ac9e79dd8">Give us some love with GITTRON</a></td></tr></table>
+<table border="0"><tr>  <td><a href="https://gittron.me/bots/0x88435a2b05a5f9ad073ed00ac9e79dd8"><img src="https://s3.amazonaws.com/od-flat-svg/0x88435a2b05a5f9ad073ed00ac9e79dd8.png" alt="gittron" width="75"/></a></td><td><a href="https://gittron.me/bots/0x88435a2b05a5f9ad073ed00ac9e79dd8">Send the TCBA some love (0.01ETH)</a></td></tr></table>
