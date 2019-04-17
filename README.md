@@ -2,9 +2,7 @@
 
 The Thoreau Centre for the Blockchain Arts (TCBA) is a virtual exhibition space built on Decentraland (20.62) with the objective of promoting art on the blockchain, by serving as a platform where artists can display their works outside the constraints of physicality.
 
-
-![TCBA](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/TCBAgit.png?token=AnOIgFbV6O1mOcHWTu7I1qfHiAue4iQUks5cofclwA%3D%3D)
-
+![Anarchists INTL District on DCL](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/DCL_map_AnarchistsINTL_District.png)
 
 # The building
 
@@ -14,6 +12,7 @@ The small footprint of this three floored building was conceived to display work
 
 *3D model [here](https://sketchfab.com/3d-models/tcba-with-visitors-e8ca61e25d4f40d7bf8bcc0c4a5e5b54)*
 
+![TCBA](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/TCBAgit.png?token=AnOIgFbV6O1mOcHWTu7I1qfHiAue4iQUks5cofclwA%3D%3D)
 
 # The name
 
@@ -28,9 +27,11 @@ Aligned with the distric guidelines [Ⓐ 20.52](https://github.com/decentraland/
 
 # TCBA Embassy
 
+![In game render of the Embassy](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/TCBA_Embassy_CVrender.png)
+
 The TCBA Embassy was built on [Cryptovoxels](https://cryptovoxels.com) and serves as a bridge between metaverses, as well as to raise awareness about the TCBA. It is placed at [1, Monad Court](https://www.cryptovoxels.com/parcels/967), in Little Tokyo just on the outskirts of the thriving Arts District.
 
-
+![Cryptovoxels map](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/CV_map_TCBA_Embassy.png)
 
 
 --This repo serves to hold all the info about TCBA and serve as a gateway to it, as well as to store images, 3d models and DCL scenes (cc0-1.0 license when applicable).
