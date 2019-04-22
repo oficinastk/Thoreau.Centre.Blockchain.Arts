@@ -43,4 +43,4 @@ Feel free to drop a line at **oficinastk at gmail.com** if you would like to kno
 
 *If you would like to support this project with some ETH, clone this badass bot, and get your very own unique ERC721 bot! Check [Gittron](https://gittron.me/about) for more info on their awesome project.
 
-<table border="0"><tr>  <td><a href="https://gittron.me/bots/0x88435a2b05a5f9ad073ed00ac9e79dd8"><img src="https://s3.amazonaws.com/od-flat-svg/0x88435a2b05a5f9ad073ed00ac9e79dd8.png" alt="gittron" width="75"/></a></td><td><a href="https://gittron.me/bots/0x88435a2b05a5f9ad073ed00ac9e79dd8">Send the TCBA some love (0.01ETH)</a></td></tr></table>
+<table border="0"><tr>  <td><a href="https://gittron.me/bots/0x17fc179c5a6c067c6b3db824f2797554"><img src="https://s3.amazonaws.com/od-flat-svg/0x17fc179c5a6c067c6b3db824f2797554.png" alt="gittron" width="75"/></a></td><td><a href="https://gittron.me/bots/0x17fc179c5a6c067c6b3db824f2797554">Send the TCBA some love</a></td></tr></table>
