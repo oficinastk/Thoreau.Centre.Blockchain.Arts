@@ -19,7 +19,9 @@ Two approaches define the core of TCBA's activity:
 
 4 - [Cryptovoxels](https://www.cryptovoxels.com/)
 
-5 - Read: **'with personal funds'**, its not really an institution, its just me. This, by extent, also means that **all the pieces in the collection are mine** since I have the private keys of TCBA's collection ETH Wallet. **I will never sell these pieces**, by the way (even when they're worth 100ETH, really), and I will take all the measures to make sure the collection remains public and online. For added transparency, you can check [OTK's address](https://etherscan.io/address/0xa4ad045d62a493f0ed883b413866448afb13087c) or [TCBA's address](https://etherscan.io/address/0x49b87e5ab0966f5ad53c51bd855d3cc645365caf).
+5 - Read: **'with personal funds'**, its not really an institution, its just me. This, by extent, also means that **all the pieces in the collection are mine** since I have the private keys of TCBA's collection ETH Wallet. **I will never sell these pieces**, by the way (even when they're worth 100ETH, really), and I will take all the measures to make sure the collection remains public, online and safe (the assets are stored in a Trezor One wallet).
+
+For added transparency, you can check [OTK's address](https://etherscan.io/address/0xa4ad045d62a493f0ed883b413866448afb13087c) or [TCBA's address](https://etherscan.io/address/0x7CE438Bf068c8F47F0F46cB7891Fc7fD0956f117).
 
 6 - Most probably through [Pixura](https://pixura.io/).
 
