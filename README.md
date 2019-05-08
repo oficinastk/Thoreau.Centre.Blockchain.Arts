@@ -25,13 +25,11 @@ It is in its imediate goals to promote regular exhibitions of old and new work b
 
 Aligned with the distric guidelines [Ⓐ 20.52](https://github.com/decentraland/districts/issues/18), the admitance of visitors to the TCBA will always be free and no fees will be charged to artists seeking to display their work.
 
-# TCBA Embassy
+# TCBA Embassy and TCBA Collection
 
-![In game render of the Embassy](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/TCBA_Embassy_CVrender.png "In game render of the Embassy at Cryptovoxels")
+The TCBA Embassy and TCBA Collection were built on [Cryptovoxels](https://cryptovoxels.com) and serves as a bridge between metaverses, as well as to raise awareness about the TCBA and to display its collection. It is placed at [1, Monad Court](https://www.cryptovoxels.com/parcels/967) and at [1, Poly Troughway](https://www.cryptovoxels.con/parcels/855), in Little Tokyo just on the outskirts of the budding Arts District.
 
-The TCBA Embassy was built on [Cryptovoxels](https://cryptovoxels.com) and serves as a bridge between metaverses, as well as to raise awareness about the TCBA. It is placed at [1, Monad Court](https://www.cryptovoxels.com/parcels/967), in Little Tokyo just on the outskirts of the thriving Arts District.
 
-![Cryptovoxels map](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/CV_map_TCBA_Embassy.png "Cryptovoxels map")
 
 
 --This repo serves to hold all the info about TCBA and serve as a gateway to it, as well as to store images, 3d models and DCL scenes (cc0-1.0 license when applicable).
