@@ -27,7 +27,7 @@ Aligned with the distric guidelines [Ⓐ 20.52](https://github.com/decentraland/
 
 # TCBA Embassy and TCBA Collection
 
-The TCBA Embassy and TCBA Collection were built on [Cryptovoxels](https://cryptovoxels.com) and serves as a bridge between metaverses, as well as to raise awareness about the TCBA and to display its collection. It is placed at [1, Monad Court](https://www.cryptovoxels.com/parcels/967) and at [1, Poly Troughway](https://www.cryptovoxels.con/parcels/855), in Little Tokyo just on the outskirts of the budding Arts District.
+The TCBA Embassy and TCBA Collection were built on [Cryptovoxels](https://cryptovoxels.com) and serves as a bridge between metaverses, as well as to raise awareness about the TCBA and to display its collection. It is placed at [1, Monad Court](https://www.cryptovoxels.com/parcels/967) and at [1, Poly Troughway](https://www.cryptovoxels.com/parcels/855), in Little Tokyo just on the outskirts of the budding Arts District.
 
 
 
