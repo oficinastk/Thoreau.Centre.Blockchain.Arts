@@ -1,8 +1,6 @@
 # Thoreau Centre for the Blockchain Arts
 
-The Thoreau Centre for the Blockchain Arts (TCBA) is a virtual exhibition space built on Decentraland (20.62) with the objective of promoting art on the blockchain, by serving as a platform where artists can display their works outside the constraints of physicality.
-
-![Anarchists INTL District on DCL](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/DCL_map_AnarchistsINTL_District.png "International Anarchists District in Decentraland")
+The Thoreau Centre for the Blockchain Arts (TCBA) is a virtual exhibition space built on Decentraland (32,54) with the objective of promoting art on the blockchain, by serving as a platform where artists can display their works outside the constraints of physicality.
 
 # The building
 
@@ -10,9 +8,7 @@ Since the very first drafts the main shape being explored was the cube, with ide
 
 The small footprint of this three floored building was conceived to display works on both 2D and 3D at several scales, providing ample flexibility for the artists to display their works, while preserving a sense of proximity and intimacy. These dynamics were explored in many previous prototypes, until this closed-open space design was reached.
 
-*3D model [here](https://sketchfab.com/3d-models/tcba-with-visitors-e8ca61e25d4f40d7bf8bcc0c4a5e5b54)*
-
-![TCBA](https://raw.githubusercontent.com/oficinastk/Thoreau.Centre.Blockchain.Arts/master/TCBAgit.png?token=AnOIgFbV6O1mOcHWTu7I1qfHiAue4iQUks5cofclwA%3D%3D "the building")
+*3D model of the first version [here](https://sketchfab.com/3d-models/tcba-with-visitors-e8ca61e25d4f40d7bf8bcc0c4a5e5b54)*
 
 # The name
 
@@ -41,4 +37,4 @@ Feel free to drop a line at **oficinastk at gmail.com** if you would like to kno
 
 *If you would like to support this project with some ETH, clone this badass bot, and get your very own unique ERC721 bot! Check [Gittron](https://gittron.me/about) for more info on their awesome project.
 
-<table border="0"><tr>  <td><a href="https://gittron.me/bots/0x17fc179c5a6c067c6b3db824f2797554"><img src="https://s3.amazonaws.com/od-flat-svg/0x17fc179c5a6c067c6b3db824f2797554.png" alt="gittron" width="75"/></a></td><td><a href="https://gittron.me/bots/0x17fc179c5a6c067c6b3db824f2797554">Send the TCBA some love</a></td></tr></table>
+<table border="0"><tr>  <td><a href="https://gittron.me/bots/0x46951837748ce521efc14d841b03ad29"><img src="https://s3.amazonaws.com/od-flat-svg/0x46951837748ce521efc14d841b03ad29.png" alt="gittron" width="75"/></a></td><td><a href="https://gittron.me/bots/0x46951837748ce521efc14d841b03ad29">Send the TCBA some love!</a></td></tr></table>
