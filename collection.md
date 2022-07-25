@@ -15,9 +15,9 @@ Two approaches define the core of TCBA's activity:
 
 2- By blockchain arts (which is a somewhat controversial term), I mean **original art** that has been **attached to some form of 'digital certification of origin'**. For ex. smart contracts on the Ethereum blockchain that mint ERC721 tokens, as the ones used by platforms like Known Origin, Super Rare, Makersplace, Mokens, Digital Art Chain and Artists Liberation Front, among others.
 
-3- [Decentraland](https://decentraland.org/](https://play.decentraland.org/?realm=dg&position=33%2C54&island=I4u50)
+3- [TCBA DCL](https://play.decentraland.org/?realm=dg&position=33%2C54&island=I4u50)
 
-4- [Cryptovoxels](https://www.cryptovoxels.com/](https://www.voxels.com/parcels/855)
+4- [TCBA main building](https://www.voxels.com/parcels/855)
 
 5- [TCBA Collection online](https://oficinastk.github.io/TCBAcollection.html)
 
