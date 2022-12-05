@@ -1,0 +1,511 @@
+<html>
+<head>
+
+  <title>Thoreau Centre for the Blockchain Arts - Collection</title>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+  <!-- jquery and lazysizes -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+
+  <!-- custom css -->
+  <!-- <link rel="stylesheet" href="css/baseAlt.css" type="text/css" rel="stylesheet" media="all"> -->
+  <!-- bootstrap (cards) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+  
+  <!-- masonry -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+
+  <style>
+	
+
+    .grid-sizer,
+    .grid-item {
+      width: 100%;
+    }
+	
+    .grid-item {
+      float: left;
+      overflow: hidden;
+      margin-bottom: 2%;
+    }
+
+    .gutter-sizer {
+	
+	
+      width: 2%;
+    }
+
+    .grid-item .media {
+      display: block;
+      width: 100%
+    }
+
+    @media screen and (min-width: 768px) {
+      /* 5 columns for larger screens */
+      .grid-sizer, .grid-item { width: 32%; }
+    }
+	
+	  @media screen and (min-width: 1200px) {
+      /* 5 columns for larger screens */
+      .grid-sizer, .grid-item { width: 23.5%; }
+    }
+	
+	
+    /*  --  */
+    
+    a:link {
+      color: white;
+    }	
+
+    body {
+	  background: linear-gradient(161deg,#f1e600,#f9f9f4,#040403);
+	  background-size: 180% 180%;
+	  animation: gradient-animation 15s ease infinite;
+    }
+	
+	@keyframes gradient-animation {
+	  0% {
+		background-position: 0% 50%;
+	  }
+	  50% {
+		background-position: 100% 50%;
+	  }
+	  100% {
+		background-position: 0% 50%;
+	  }
+	}
+    
+    .card {
+      background: #FFFFFF;
+      border: #FFFFFF;
+      max-width: 100%;
+    }
+    
+    .card-text {
+      color: #5db2e1;
+      font-family: "Monaco", monospace;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      hyphens: auto;
+    }
+    
+    .card-title {
+      color: #5db2e1;
+      font-family: "Monaco", monospace;
+      margin-top: 5px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      hyphens: auto;
+    }
+    
+    .card-body {
+      margin: 0px;
+      /* background-color: aqua; */
+    }
+
+    /* .card-body > div {
+      background-color: aqua;
+    } */
+
+
+    /* margem da imagem */
+    #media {
+      margin: 3%
+    }
+
+  
+    /*
+    flip card
+    */
+
+    /* .card-flip {
+      perspective: 2000px;
+    }
+
+    .card-flip > div {
+      transform-style:preserve-3d;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: transform 600ms;
+      transition-timing-function: linear;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      display: flex;
+    }
+
+    .card-front {
+      transform: rotateY(0deg);
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      position: absolute;
+      top: 0;
+    }
+
+    .card-flip:hover .card-front {
+      transform: rotateY(-180deg);
+    }
+      
+    .card-flip:hover .card-back {
+      transform: rotateY(0deg);
+    } */
+
+  </style>
+
+    
+</head>
+<body>
+
+
+  <div class="container-fluid pt-3 pl-3 pr-3 pb-3">
+    <div class="grid" id="main">
+      <div class="grid-sizer"></div>
+      <div class="gutter-sizer"></div> 
+      <div class="grid-item">
+        <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">TCBA Collection</h5>
+          <p>The Thoreau Centre for the Blockchain Arts is firmly dedicated to show the works of artists using Ethereum and Tezos blockchains as their medium of creation or distribution. It stands proudly as one of the most diverse and inclusive collections displaying both established and non-established artists from all walks, as well as one of the oldest 'institutions' in the NFT space.
+		  </p>
+            <p>Read more about this project 
+            <a href="https://github.com/oficinastk/Thoreau.Centre.Blockchain.Arts">here</a>.          
+            <br>
+          </p>
+          <p style="font-size:80%;">
+            Assets are decentralized and (mostly) stored on IPFS so please wait a moment for them to load :)
+          </p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script>
+
+    function paginated_fetch(url = is_required("url"), params, myHeaders, previousResponse = []) {
+      return fetch(url + params.toString(), myHeaders) // Append the page number to the base URL
+        .then(response => response.json())
+        .then(newResponse => {
+          // console.log(newResponse)
+          const response = [...previousResponse, ...newResponse['assets']]; // Combine the two arrays
+
+          if (newResponse['next']) {
+            params.append('cursor', newResponse['next'])
+            return paginated_fetch(url, params, myHeaders, response);
+          }
+
+          return response;
+        });
+    }
+
+
+    async function getOpensea(grid) {
+
+      const url_ETH = "https://api.opensea.io/api/v1/assets?"
+
+      const params = new URLSearchParams({
+        "owner":"0x7CE438Bf068c8F47F0F46cB7891Fc7fD0956f117",
+        "limit":"200"
+      })
+      
+      const api_key = "9f5c9b08070343e8b7bb5f01054752e4"
+      const myHeaders = new Headers({"X-API-KEY": api_key});
+
+      // let type = null
+      const banned_eth_contracts = [
+        '0xdfa1b0e237ab8b5a014e5180cba68ac19accc2bf',
+        '0x61a9ea5ec7406b0cc34e9ac19bf90e204e4898d3',
+        '0x92b971d307ebfc7331c23429e204a5e4adf7a833'
+      ]
+
+      paginated_fetch(url_ETH, params, myHeaders, []).then(assets => {
+
+        for (index in assets) {
+            
+          nft = assets[index]
+          console.log(nft)
+
+          nft_contract = nft['asset_contract']['address']
+
+          if (banned_eth_contracts.includes(nft_contract)) continue
+
+          if (nft['animation_url']) {
+            if (nft['animation_url'].endsWith('mp4')) {
+              type = 'video'
+              img_url = nft['animation_url']
+            } else if (nft['image_url']) {
+              type = 'image'
+              img_url = nft['image_url']
+            }
+
+          } else if (nft['image_url']) {
+            type = 'image'
+            img_url = nft['image_url']
+            
+          } else {
+            type = 'unknown'
+            img_url = ''
+          }
+          
+          name = nft['name'] + ' - ' + nft['asset_contract']['address']
+          // desc = nft['description']
+          creation_date = new Date(nft['asset_contract']['created_date']).getFullYear()
+          
+          artist_name = null
+          creator = nft['creator']
+          if (creator) {
+              if (creator['user']) {
+                  if (creator['user']['username']) {
+                      artist_name = creator['user']['username']
+                  }
+              } else {
+                  artist_name = creator['address']
+              }
+          } else {
+              artist_name = 'Unknown'
+          }
+          
+
+          doCard(img_url, type, name, artist_name, creation_date, grid)
+          
+        }
+          
+      }).catch(function(err) {
+          console.log(err);
+      });
+
+    }
+
+
+    async function getTezos(grid) {
+
+      const tezos_url = 'https://api.tzkt.io/'
+      const tezos_address = 'tz1MkJT1ZpqmTzvS9QFJSa4GpaLNRyRaLCYd'
+      const query = `v1/tokens/balances?account=${tezos_address}&limit=1000`
+      const url = tezos_url + query
+      
+      // let elems = []
+
+      await fetch(url).then(function(response) {
+        return response.json();
+      }).then(function(data) {
+        
+        // console.log(data)
+        for (let i = 0; i < data.length; i++) {
+
+          creation_date = new Date(data[i]['firstTime']).getFullYear()
+          token = data[i]['token']
+          meta = token['metadata']
+          if (meta) {
+
+            token_url = meta['artifactUri']
+            artist = meta['creators']
+            name = meta['name']
+
+            if ('formats' in meta) {
+              type = meta['formats'][0]['mimeType']
+            } 
+            
+            if (token_url) {
+              doCard(token_url, type, name, artist, creation_date, grid)
+            }
+          }
+          
+          
+        }
+      }).catch(function(err) {
+        console.log(err);
+      });
+
+    }
+
+
+
+    function fixURL2(url){
+      if(url.startsWith("ipfs://ipfs")){
+        return "https://ipfs.io/ipfs/"+url.split("ipfs://ipfs/").slice(-1)[0];
+      } else if (url.startsWith("ipfs://")) {
+        return "https://ipfs.io/ipfs/"+url.split("ipfs://").slice(-1)[0];
+      } else {
+        return url
+      }
+    }
+
+
+    function doCard(url, type, name, artist, creation_date, $grid) {
+  
+      const gridItem = document.createElement("div");
+      gridItem.className = "grid-item";
+
+      const gridItemContent = document.createElement("div");
+      gridItemContent.className = "grid-item-content";
+
+      const card = document.createElement("div");
+		  card.className = "card";
+      // card.className = "card card-flip";
+
+      // const cardInner = document.createElement("div");
+		  // cardInner.className = "flip-card-inner";
+
+      // const cardFront = document.createElement("div");
+		  // cardFront.className = "card-front";
+
+      // const cardBack = document.createElement("div");
+		  // cardBack.className = "card-back";
+
+      // const cardBodyFront = document.createElement("div");
+		  // cardBodyFront.className = "card-body";
+
+      // const cardBodyBack = document.createElement("div");
+		  // cardBodyBack.className = "card-body";
+
+      const cardBody = document.createElement("div");
+		  cardBody.className = "card-body";
+
+      // const divBack = document.createElement("div");
+		  // // cardBodyBack.className = "card-body";
+
+      // const divFront = document.createElement("div");
+		  // // cardBodyBack.className = "card-body";
+
+      const div = document.createElement("div");
+		  // cardBodyBack.className = "card-body";
+
+      const title = document.createElement("h5");
+		  title.className = "card-title";
+      title.textContent = name
+
+      const text = document.createElement("p");
+		  text.className = "card-text";
+      text.textContent = artist     
+	
+      const date = document.createElement("p");
+		  date.className = "card-text";
+      date.textContent = creation_date 
+
+      const a_el = document.createElement("a");
+      a_el.setAttribute('href', fixURL2(url))
+      a_el.setAttribute('id', 'media')
+
+      const grid = document.getElementById('main');
+      grid.appendChild(gridItem)
+      gridItem.appendChild(gridItemContent)
+      gridItemContent.appendChild(card)
+      // card.appendChild(cardFront)
+      // card.appendChild(cardBack)
+      
+      // cardFront.appendChild(cardBodyFront)
+      // cardBodyFront.appendChild(divFront)
+      // divFront.appendChild(a_el)
+
+      // cardBack.appendChild(cardBodyBack)
+      // cardBodyBack.appendChild(divBack)
+      // divBack.appendChild(title)
+      // divBack.appendChild(text)
+      // divBack.appendChild(date)
+
+      card.appendChild(cardBody)
+      cardBody.appendChild(div)
+      div.appendChild(title)
+      div.appendChild(text)
+      div.appendChild(date)
+
+      card.appendChild(a_el)
+      
+   
+
+      let media = null
+      if (type.startsWith('image')) {
+
+        media = document.createElement("img");
+        a_el.appendChild(media);
+
+      } else if (type.startsWith('video')) {
+
+        media = document.createElement("video");
+        media.setAttribute('loop', 'true')
+        media.controls = true;
+        media.autoplay = true;
+        media.muted = true;
+        a_el.appendChild(media);
+
+      } else if (type.startsWith('application')) {
+
+        media = document.createElement("embed")
+        media.type = type
+        a_el.appendChild(media);
+
+      } else if (type.startsWith('text')) {
+
+        media = document.createElement("iframe")
+        a_el.appendChild(media);
+        
+      }
+
+      if (media != null) {
+
+        media.setAttribute('data-src', fixURL2(url))
+        // media.setAttribute('src', 'imagens/loading.svg')
+		    media.setAttribute('src', 'https://raw.githubusercontent.com/oficinastk/oficinastk.github.io/master/TCBA/loading.svg')
+        media.className = 'lazyload media'
+      }
+      
+      $grid.append(gridItem).masonry('appended', gridItem);
+
+    }
+
+
+
+    // -------------- MAIN -------------- \\
+
+    const $grid = $('.grid').masonry({
+          itemSelector: '.grid-item',
+          gutter: '.gutter-sizer',
+          columnWidth: '.grid-sizer',
+          percentPosition: true,
+          horizontalOrder: true
+        })
+
+
+    // get opensea nfts
+    getOpensea($grid)
+
+    // get tezos nfts
+    getTezos($grid)
+
+    // layout Masonry after each image loads
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry('layout');
+    });
+
+
+    $('.grid').each(function(){
+      var $module = $(this);
+      var update = function(){
+        $module.masonry('layout');
+      };
+
+      this.addEventListener('load', update, true);
+
+      $module.masonry();
+    });
+
+
+
+
+  </script>
+</body>
+</html>
