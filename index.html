@@ -11,8 +11,6 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
 
-  <!-- custom css -->
-  <!-- <link rel="stylesheet" href="css/baseAlt.css" type="text/css" rel="stylesheet" media="all"> -->
   <!-- bootstrap (cards) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
@@ -20,6 +18,9 @@
   <!-- masonry -->
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
   <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+  <!-- graphql -->
+  <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/graphql@16.8.1/index.min.js"></script> -->
 
   <style>
 	
@@ -277,6 +278,8 @@
         return "https://ipfs.io/ipfs/"+url.split("ipfs://ipfs/").slice(-1)[0];
       } else if (url.startsWith("ipfs://")) {
         return "https://ipfs.io/ipfs/"+url.split("ipfs://").slice(-1)[0];
+      } else if (url.includes('infura')) {
+        return url.replace('infura.', '')
       } else {
         return url
       }
@@ -293,34 +296,11 @@
 
       const card = document.createElement("div");
 		  card.className = "card";
-      // card.className = "card card-flip";
-
-      // const cardInner = document.createElement("div");
-		  // cardInner.className = "flip-card-inner";
-
-      // const cardFront = document.createElement("div");
-		  // cardFront.className = "card-front";
-
-      // const cardBack = document.createElement("div");
-		  // cardBack.className = "card-back";
-
-      // const cardBodyFront = document.createElement("div");
-		  // cardBodyFront.className = "card-body";
-
-      // const cardBodyBack = document.createElement("div");
-		  // cardBodyBack.className = "card-body";
 
       const cardBody = document.createElement("div");
 		  cardBody.className = "card-body";
 
-      // const divBack = document.createElement("div");
-		  // // cardBodyBack.className = "card-body";
-
-      // const divFront = document.createElement("div");
-		  // // cardBodyBack.className = "card-body";
-
       const div = document.createElement("div");
-		  // cardBodyBack.className = "card-body";
 
       const title = document.createElement("h5");
 		  title.className = "card-title";
@@ -342,18 +322,6 @@
       grid.appendChild(gridItem)
       gridItem.appendChild(gridItemContent)
       gridItemContent.appendChild(card)
-      // card.appendChild(cardFront)
-      // card.appendChild(cardBack)
-      
-      // cardFront.appendChild(cardBodyFront)
-      // cardBodyFront.appendChild(divFront)
-      // divFront.appendChild(a_el)
-
-      // cardBack.appendChild(cardBodyBack)
-      // cardBodyBack.appendChild(divBack)
-      // divBack.appendChild(title)
-      // divBack.appendChild(text)
-      // divBack.appendChild(date)
 
       card.appendChild(cardBody)
       cardBody.appendChild(div)
