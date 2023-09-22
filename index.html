@@ -21,7 +21,6 @@
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
   <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
-
   <style>
 	
 
@@ -109,57 +108,12 @@
     
     .card-body {
       margin: 0px;
-      /* background-color: aqua; */
     }
-
-    /* .card-body > div {
-      background-color: aqua;
-    } */
-
 
     /* margem da imagem */
     #media {
       margin: 3%
     }
-
-  
-    /*
-    flip card
-    */
-
-    /* .card-flip {
-      perspective: 2000px;
-    }
-
-    .card-flip > div {
-      transform-style:preserve-3d;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      transition: transform 600ms;
-      transition-timing-function: linear;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      display: flex;
-    }
-
-    .card-front {
-      transform: rotateY(0deg);
-    }
-
-    .card-back {
-      transform: rotateY(180deg);
-      position: absolute;
-      top: 0;
-    }
-
-    .card-flip:hover .card-front {
-      transform: rotateY(-180deg);
-    }
-      
-    .card-flip:hover .card-back {
-      transform: rotateY(0deg);
-    } */
 
   </style>
 
@@ -195,97 +149,82 @@
 
   <script>
 
-    function paginated_fetch(url = is_required("url"), params, myHeaders, previousResponse = []) {
-      return fetch(url + params.toString(), myHeaders) // Append the page number to the base URL
-        .then(response => response.json())
-        .then(newResponse => {
-          // console.log(newResponse)
-          const response = [...previousResponse, ...newResponse['assets']]; // Combine the two arrays
+    // import ZDK from '@zoralabs/zdk';
 
-          if (newResponse['next']) {
-            params.append('cursor', newResponse['next'])
-            return paginated_fetch(url, params, myHeaders, response);
-          }
-
-          return response;
-        });
-    }
+    const banned_eth_contracts = [
+      '0xdfa1b0e237ab8b5a014e5180cba68ac19accc2bf',
+      '0x61a9ea5ec7406b0cc34e9ac19bf90e204e4898d3',
+      '0x92b971d307ebfc7331c23429e204a5e4adf7a833'
+    ]
 
 
-    async function getOpensea(grid) {
+    async function getZora(grid) {
 
-      const url_ETH = "https://api.opensea.io/api/v1/assets?"
+      const zora_api_url = "https://api.zora.co/graphql?query=";
 
-      const params = new URLSearchParams({
-        "owner":"0x7CE438Bf068c8F47F0F46cB7891Fc7fD0956f117",
-        "limit":"200"
-      })
-      
-      const api_key = "9f5c9b08070343e8b7bb5f01054752e4"
-      const myHeaders = new Headers({"X-API-KEY": api_key});
-
-      // let type = null
-      const banned_eth_contracts = [
-        '0xdfa1b0e237ab8b5a014e5180cba68ac19accc2bf',
-        '0x61a9ea5ec7406b0cc34e9ac19bf90e204e4898d3',
-        '0x92b971d307ebfc7331c23429e204a5e4adf7a833'
-      ]
-
-      paginated_fetch(url_ETH, params, myHeaders, []).then(assets => {
-
-        for (index in assets) {
-            
-          nft = assets[index]
-          console.log(nft)
-
-          nft_contract = nft['asset_contract']['address']
-
-          if (banned_eth_contracts.includes(nft_contract)) continue
-
-          if (nft['animation_url']) {
-            if (nft['animation_url'].endsWith('mp4')) {
-              type = 'video'
-              img_url = nft['animation_url']
-            } else if (nft['image_url']) {
-              type = 'image'
-              img_url = nft['image_url']
-            }
-
-          } else if (nft['image_url']) {
-            type = 'image'
-            img_url = nft['image_url']
-            
-          } else {
-            type = 'unknown'
-            img_url = ''
-          }
-          
-          name = nft['name'] + ' - ' + nft['asset_contract']['address']
-          // desc = nft['description']
-          creation_date = new Date(nft['asset_contract']['created_date']).getFullYear()
-          
-          artist_name = null
-          creator = nft['creator']
-          if (creator) {
-              if (creator['user']) {
-                  if (creator['user']['username']) {
-                      artist_name = creator['user']['username']
+      query = JSON.stringify({
+        query: `query NFTs {
+          tokens(
+            networks: [{network: ETHEREUM, chain: MAINNET}]
+            pagination: {limit: 300}
+            where: {ownerAddresses: "thoreaucentre.eth"}
+          ) {
+            nodes {
+              token {
+                collectionAddress
+                tokenId
+                name
+                owner
+                image {
+                  url
+                  mimeType
+                }
+                metadata
+                mintInfo {
+                  originatorAddress
+                  mintContext {
+                    blockTimestamp
                   }
-              } else {
-                  artist_name = creator['address']
+                }
               }
-          } else {
-              artist_name = 'Unknown'
+            }
           }
-          
+        }`
+      })
 
-          doCard(img_url, type, name, artist_name, creation_date, grid)
+
+      fetch(zora_api_url, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: query
+      })
+      .then(res => res.json())
+      .then(res => {
+
+        res.data.tokens.nodes.forEach(token => {
           
-        }
+          nft = token.token
+
+          if (nft.collectionAddress in banned_eth_contracts) return 
+
+          if (nft.image) {
+            if (nft.image.url) {
+              img_url = nft.image.url
+              type = nft.image.mimeType
+              name = nft.name
+              artist_name = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
+              creation_date = nft.mintInfo ? new Date(nft.mintInfo.mintContext.blockTimestamp).getFullYear() : ''
+
+              doCard(img_url, type, name, artist_name, creation_date, grid)
+            }
+            
+          }
+
           
-      }).catch(function(err) {
-          console.log(err);
-      });
+        });
+      })        
 
     }
 
@@ -297,7 +236,6 @@
       const query = `v1/tokens/balances?account=${tezos_address}&limit=1000`
       const url = tezos_url + query
       
-      // let elems = []
 
       await fetch(url).then(function(response) {
         return response.json();
@@ -428,32 +366,35 @@
    
 
       let media = null
-      if (type.startsWith('image')) {
+      if (type) {
+        if (type.startsWith('image')) {
 
-        media = document.createElement("img");
-        a_el.appendChild(media);
+          media = document.createElement("img");
+          a_el.appendChild(media);
 
-      } else if (type.startsWith('video')) {
+        } else if (type.startsWith('video')) {
 
-        media = document.createElement("video");
-        media.setAttribute('loop', 'true')
-        media.controls = true;
-        media.autoplay = true;
-        media.muted = true;
-        a_el.appendChild(media);
+          media = document.createElement("video");
+          media.setAttribute('loop', 'true')
+          media.controls = true;
+          media.autoplay = true;
+          media.muted = true;
+          a_el.appendChild(media);
 
-      } else if (type.startsWith('application')) {
+        } else if (type.startsWith('application')) {
 
-        media = document.createElement("embed")
-        media.type = type
-        a_el.appendChild(media);
+          media = document.createElement("embed")
+          media.type = type
+          a_el.appendChild(media);
 
-      } else if (type.startsWith('text')) {
+        } else if (type.startsWith('text')) {
 
-        media = document.createElement("iframe")
-        a_el.appendChild(media);
-        
+          media = document.createElement("iframe")
+          a_el.appendChild(media);
+
+        }
       }
+      
 
       if (media != null) {
 
@@ -480,8 +421,8 @@
         })
 
 
-    // get opensea nfts
-    getOpensea($grid)
+    // get eth nfts
+    getZora($grid)
 
     // get tezos nfts
     getTezos($grid)
