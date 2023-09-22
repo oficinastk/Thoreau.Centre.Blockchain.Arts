@@ -70,17 +70,17 @@
 	  animation: gradient-animation 15s ease infinite;
     }
 	
-	@keyframes gradient-animation {
-	  0% {
-		background-position: 0% 50%;
-	  }
-	  50% {
-		background-position: 100% 50%;
-	  }
-	  100% {
-		background-position: 0% 50%;
-	  }
-	}
+    @keyframes gradient-animation {
+      0% {
+      background-position: 0% 50%;
+      }
+      50% {
+      background-position: 100% 50%;
+      }
+      100% {
+      background-position: 0% 50%;
+      }
+    }
     
     .card {
       background: #FFFFFF;
@@ -176,6 +176,10 @@
                 tokenId
                 name
                 owner
+                content {
+                  url
+                  mimeType
+                }
                 image {
                   url
                   mimeType
@@ -204,23 +208,41 @@
       .then(res => res.json())
       .then(res => {
 
+        console.log(res)
         res.data.tokens.nodes.forEach(token => {
           
           nft = token.token
 
           if (nft.collectionAddress in banned_eth_contracts) return 
 
-          if (nft.image) {
+          img_url = null
+          type = null
+          if (nft.content) {
+            if (nft.content.url) {
+              img_url = nft.content.url
+              type = nft.content.mimeType
+            }
+          }
+
+          if (!img_url && nft.image) {
             if (nft.image.url) {
               img_url = nft.image.url
               type = nft.image.mimeType
-              name = nft.name
-              artist_name = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
-              creation_date = nft.mintInfo ? new Date(nft.mintInfo.mintContext.blockTimestamp).getFullYear() : ''
-
-              doCard(img_url, type, name, artist_name, creation_date, grid)
             }
-            
+          }
+
+          if (img_url) {
+
+            if (img_url.includes('arweave')) {
+              console.log(nft.name)
+              console.log(type)
+              
+            }
+            name = nft.name
+            artist_name = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
+            creation_date = nft.mintInfo ? new Date(nft.mintInfo.mintContext.blockTimestamp).getFullYear() : ''
+
+            doCard(img_url, type, name, artist_name, creation_date, grid)
           }
 
           
@@ -273,13 +295,17 @@
 
 
 
-    function fixURL2(url){
+    function fixURL2(url,type){
+      
+      // console.log(url)
       if(url.startsWith("ipfs://ipfs")){
         return "https://ipfs.io/ipfs/"+url.split("ipfs://ipfs/").slice(-1)[0];
       } else if (url.startsWith("ipfs://")) {
         return "https://ipfs.io/ipfs/"+url.split("ipfs://").slice(-1)[0];
       } else if (url.includes('infura')) {
         return url.replace('infura.', '')
+      } else if (url.includes('daonomic.com')) {
+        return url.replace('daonomic.com', 'io')
       } else {
         return url
       }
@@ -315,7 +341,7 @@
       date.textContent = creation_date 
 
       const a_el = document.createElement("a");
-      a_el.setAttribute('href', fixURL2(url))
+      a_el.setAttribute('href', fixURL2(url,type))
       a_el.setAttribute('id', 'media')
 
       const grid = document.getElementById('main');
@@ -366,7 +392,7 @@
 
       if (media != null) {
 
-        media.setAttribute('data-src', fixURL2(url))
+        media.setAttribute('data-src', fixURL2(url,type))
         // media.setAttribute('src', 'imagens/loading.svg')
 		    media.setAttribute('src', 'https://raw.githubusercontent.com/oficinastk/oficinastk.github.io/master/TCBA/loading.svg')
         media.className = 'lazyload media'
