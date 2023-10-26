@@ -150,17 +150,171 @@
 
   <script>
 
+    function paginated_fetch(url = is_required("url"), params, myHeaders, previousResponse = []) {
+      return fetch(url + params.toString(), myHeaders) // Append the page number to the base URL
+        .then(response => response.json())
+        .then(newResponse => {
+          // console.log(newResponse)
+          console.log(newResponse)
+          const response = [...previousResponse, ...newResponse['result']]; // Combine the two arrays
+
+          if (newResponse['hasNextPage']) {
+            
+            params.set('cursor', newResponse['hasNextPage'])
+            console.log(params.toString())
+            return paginated_fetch(url, params, myHeaders, response);
+
+          }
+          return response;
+
+        })
+      }
     // import ZDK from '@zoralabs/zdk';
 
     const banned_eth_contracts = [
       '0xdfa1b0e237ab8b5a014e5180cba68ac19accc2bf',
       '0x61a9ea5ec7406b0cc34e9ac19bf90e204e4898d3',
-      '0x92b971d307ebfc7331c23429e204a5e4adf7a833'
+      '0x92b971d307ebfc7331c23429e204a5e4adf7a833',
+      '0x61d38d44e6c2397e4316018144911a77021104a6',
+      '0xdbbf1b941e5864e8fdb4f6e0b309ae2ec9459bbf'
     ]
+
+
+    // async function getMoralis(grid) {
+
+    //   const ethAddress = '0x7CE438Bf068c8F47F0F46cB7891Fc7fD0956f117'
+
+    //   // Replace with your Alchemy API key:
+    //   const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6IjQzMjNlNGVlLTc3NWYtNGRlMy05ZTY4LTY4ZGNiY2U2ODcyZiIsIm9yZ0lkIjoiNTg2MTAiLCJ1c2VySWQiOiI1ODI1OSIsInR5cGVJZCI6IjFjYzY1MjE0LTYzNWQtNGQzNy05ZDJiLWM1MDUwZjFlN2Y3NiIsInR5cGUiOiJQUk9KRUNUIiwiaWF0IjoxNjk1NDEwMTE4LCJleHAiOjQ4NTExNzAxMTh9.E44-c4EVJmmweRicI2bhQwP3B6Seo4MQUaP0DHyvz1s';
+    //   const fetchURL = `https://deep-index.moralis.io/api/v2.2/${ethAddress}/nft?`;
+
+    //   // Replace with the wallet address you want to query:
+      
+    //   // Replace with the token contract address you want to query:
+    //   // const tokenAddr = "0x607f4c5bb672230e8672085532f7e901544a7375";
+
+    //   const options = {
+    //     method: 'GET', 
+    //     headers: {
+    //       'X-API-Key': apiKey,
+    //       'accept': 'application/json'
+    //     }};
+
+    //   const params = new URLSearchParams({
+    //     // owner_addresses: ethAddress,
+    //     // limit: 5
+    //     chain: 'eth'
+    //     })
+
+    //   paginated_fetch(fetchURL, params, options, []).then(assets => {
+    //     console.log(assets)
+
+    //     console.log(res)
+    //     let contractList = []
+    //     let contractDict = {}
+    //     assets.forEach(token => {
+          
+    //       nft = token
+
+    //       if (nft.collectionAddress in banned_eth_contracts) return 
+    //       contractDict[nft.collectionAddress] = nft
+    //       contractList.push(nft.collectionAddress)
+
+    //       let img_url = null
+    //       let type = null
+    //       if (nft.content) {
+    //         if (nft.content.url) {
+    //           img_url = nft.content.url
+    //           type = nft.content.mimeType
+    //         }
+    //       }
+
+    //       if (!img_url && nft.image) {
+    //         if (nft.image.url) {
+    //           img_url = nft.image.url
+    //           type = nft.image.mimeType
+    //         }
+    //       }
+
+    //       if (img_url) {
+
+    //         if (img_url.includes('arweave')) {
+    //           // console.log(nft)
+    //           // console.log(nft.name)
+    //           // console.log(type)
+              
+    //         }
+    //         name = nft.name
+    //         artist_name = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
+    //         creation_date = nft.mintInfo ? new Date(nft.mintInfo.mintContext.blockTimestamp).getFullYear() : ''
+
+    //         doCard(img_url, type, name, artist_name, creation_date, grid)
+    //       }
+
+          
+    //     });
+
+    //     const uniqueContracts = new Set(contractList)
+    //     console.log(uniqueContracts)
+    //     const uniqueNfts = contractDict[uniqueContracts]
+    //     console.log(uniqueNfts)
+
+    //   })
+
+    // }
+
+
+    // class NFT{
+
+    //   constructor(object) {
+
+    //     // console.log(object)
+    //     this.collectionAddress = object.collectionAddress
+    //     this.tokenId = object.tokenId
+    //     this.name = object.name
+    //     this.owner = object.owner
+    //     this.content = {
+    //       url: object.content.url,
+    //       mimeType: object.content.mimeType
+    //     }
+    //     this.image = {
+    //       url: object.image.url,
+    //       mimeType: object.image.mimeType
+    //     }
+    //     this.metadata = object.metadata
+    //     this.mintInfo = {
+    //       originatorAddress: object.mintInfo.originatorAddress,
+    //       mintContext: {
+    //         blockTimestamp: object.mintInfo.mintContext.blockTimestamp
+    //       }
+    //     }
+
+    //     // Object.assign(this, object);
+    //   }
+
+    // }
 
 
     async function getZora(grid) {
 
+      
+
+// fetch(`${fetchURL}/getNFTsForOwner?owner=${ethAddress}&withMetadata=true&pageSize=100`, options)
+//   .then(response => response.json())
+//   .then(response => console.log(response))
+//   .catch(err => console.error(err));
+
+      // const options = {method: 'POST', headers: {accept: 'application/json'}};
+ 
+      // const ethAddress = '0x7CE438Bf068c8F47F0F46cB7891Fc7fD0956f117'
+      // const alchemyURL = 'https://eth-mainnet.g.alchemy.com/v2/kh9TN_pTl-ANYxxkmcmlDrVwjgdsULX-'
+      // fetch(`${alchemyURL}/alchemy_getTokenBalances?owner=${ethAddress}&pageSize=100&withMetadata=true`, options)
+      // .then(response => response.json())
+      // .then(response => console.log(response))
+      // .catch(err => console.error(err));
+
+
+      const ethAddress = '0x7CE438Bf068c8F47F0F46cB7891Fc7fD0956f117'
       const zora_api_url = "https://api.zora.co/graphql?query=";
 
       query = JSON.stringify({
@@ -209,14 +363,24 @@
       .then(res => {
 
         console.log(res)
+
+        // res.data.tokens.nodes.sort((a,b) => (a.collectionAddress > b.collectionAddress) ? 1 : ((b.collectionAddress > a.collectionAddress) ? -1 : 0))
+        // const jsonDataTokens = JSON.stringify(res.data.tokens.nodes, null, 2)
+        // download(jsonDataTokens, `allNFTs.txt`, 'text/plain');
+
+        // let contractList = []
+        // let contractDict = {}
+        // let brokenNFTs = []
         res.data.tokens.nodes.forEach(token => {
           
-          nft = token.token
+          const nft = token.token
 
           if (nft.collectionAddress in banned_eth_contracts) return 
+          // contractDict[nft.collectionAddress] = nft
+          // contractList.push(nft.collectionAddress)
 
-          img_url = null
-          type = null
+          let img_url = null
+          let type = null
           if (nft.content) {
             if (nft.content.url) {
               img_url = nft.content.url
@@ -231,24 +395,104 @@
             }
           }
 
+          if((!img_url) && nft.metadata) {
+
+            if('imgUrl' in nft.metadata) {
+              img_url = nft.metadata.imgUrl
+            }
+
+            if('imageUrl' in nft.metadata) {
+              img_url = nft.metadata.imageUrl
+            }
+
+            if(nft.metadata.image) {
+              img_url = nft.metadata.image
+            }
+
+            if(nft.metadata.url) {
+              img_url = nft.metadata.url
+            }
+
+          }
+
+          // para OG:crystal
+          if(img_url) {
+            if(img_url.includes('animation') & !type) {
+              type = 'video'
+            }
+          }
+          
+
+          
+
+          const name = nft.name
+          const artist_name = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
+          const creation_date = nft.mintInfo ? new Date(nft.mintInfo.mintContext.blockTimestamp).getFullYear() : ''
+
+          // para winter solstice
+          if(name) {
+            if(name.includes('Solstice') & !type) {
+              type = 'video'
+            }
+
+            if(name.includes('Pope')) {
+              type = 'image'
+            }
+          }
+          
+
+          if(artist_name == ethAddress & nft.metadata) {
+            console.log(nft.metadata)
+          } 
+
+
           if (img_url) {
 
             if (img_url.includes('arweave')) {
-              console.log(nft.name)
-              console.log(type)
+              // console.log(nft)
+              // console.log(nft.name)
+              // console.log(type)
               
             }
-            name = nft.name
-            artist_name = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
-            creation_date = nft.mintInfo ? new Date(nft.mintInfo.mintContext.blockTimestamp).getFullYear() : ''
 
             doCard(img_url, type, name, artist_name, creation_date, grid)
           }
 
+
+          // // guardar tipo de metadata
+          // if(!name || !artist_name || !creation_date || !img_url || !type) {
+          //   if(nft.metadata) {
+          //     const brokenNFT = {
+          //     collectionAddress: nft.collectionAddress,
+          //     name: name,
+          //     artist_name: artist_name,
+          //     creation_date: creation_date,
+          //     img_url: img_url,
+          //     type: type,
+          //     metadata: nft.metadata
+          //   }
+          //   brokenNFTs.push(brokenNFT)
+          //   }
+          // }
+
           
         });
+
+        // brokenNFTs.sort((a,b) => (a.collectionAddress > b.collectionAddress) ? 1 : ((b.collectionAddress > a.collectionAddress) ? -1 : 0))
+        // const jsonData = JSON.stringify(brokenNFTs, null, 2)
+        // download(jsonData, `brokenNFTs.txt`, 'text/plain');
+
       })        
 
+    }
+
+
+    function download(content, fileName, contentType) {
+      var a = document.createElement("a");
+      var file = new Blob([content], {type: contentType});
+      a.href = URL.createObjectURL(file);
+      a.download = fileName;
+      a.click();
     }
 
 
@@ -295,7 +539,7 @@
 
 
 
-    function fixURL2(url,type){
+    function fixURL2(url){
       
       // console.log(url)
       if(url.startsWith("ipfs://ipfs")){
@@ -341,7 +585,7 @@
       date.textContent = creation_date 
 
       const a_el = document.createElement("a");
-      a_el.setAttribute('href', fixURL2(url,type))
+      a_el.setAttribute('href', fixURL2(url))
       a_el.setAttribute('id', 'media')
 
       const grid = document.getElementById('main');
@@ -387,12 +631,16 @@
           a_el.appendChild(media);
 
         }
+      } else {
+        // assume que e imagem
+        media = document.createElement("img");
+        a_el.appendChild(media);
       }
       
 
       if (media != null) {
 
-        media.setAttribute('data-src', fixURL2(url,type))
+        media.setAttribute('data-src', fixURL2(url))
         // media.setAttribute('src', 'imagens/loading.svg')
 		    media.setAttribute('src', 'https://raw.githubusercontent.com/oficinastk/oficinastk.github.io/master/TCBA/loading.svg')
         media.className = 'lazyload media'
@@ -416,6 +664,7 @@
 
 
     // get eth nfts
+    // getMoralis($grid)
     getZora($grid)
 
     // get tezos nfts
