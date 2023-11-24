@@ -149,7 +149,14 @@
 
   
 
-  <script>
+  <script type="module">
+
+    // import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.8.0/ethers.js";
+    // import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js";
+    // const provider = ethers.getDefaultProvider()
+  
+    // console.log(ethers)
+    // import { ethers } from "https://cdn-cors.ethers.io/lib/ethers-5.7.esm.min.js";
 
     function paginated_fetch(url = is_required("url"), params, myHeaders, previousResponse = []) {
       return fetch(url + params.toString(), myHeaders) // Append the page number to the base URL
@@ -172,13 +179,7 @@
       }
     // import ZDK from '@zoralabs/zdk';
 
-    const banned_eth_contracts = [
-      '0xdfa1b0e237ab8b5a014e5180cba68ac19accc2bf',
-      '0x61a9ea5ec7406b0cc34e9ac19bf90e204e4898d3',
-      '0x92b971d307ebfc7331c23429e204a5e4adf7a833',
-      '0x61d38d44e6c2397e4316018144911a77021104a6',
-      '0xdbbf1b941e5864e8fdb4f6e0b309ae2ec9459bbf'
-    ]
+    
 
 
     // async function getMoralis(grid) {
@@ -246,10 +247,10 @@
               
     //         }
     //         name = nft.name
-    //         artist_name = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
+    //         artistName = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
     //         creation_date = nft.mintInfo ? new Date(nft.mintInfo.mintContext.blockTimestamp).getFullYear() : ''
 
-    //         doCard(img_url, type, name, artist_name, creation_date, grid)
+    //         doCard(img_url, type, name, artistName, creation_date, grid)
     //       }
 
           
@@ -315,10 +316,18 @@
       // .catch(err => console.error(err));
 
 
-      const ethAddress = '0x7CE438Bf068c8F47F0F46cB7891Fc7fD0956f117'
+      const banned_eth_contracts = [
+        '0xdfa1b0e237ab8b5a014e5180cba68ac19accc2bf',
+        '0x61a9ea5ec7406b0cc34e9ac19bf90e204e4898d3',
+        '0x92b971d307ebfc7331c23429e204a5e4adf7a833',
+        '0x61d38d44e6c2397e4316018144911a77021104a6',
+        '0xdbbf1b941e5864e8fdb4f6e0b309ae2ec9459bbf'
+      ]
+
+      const ethAddress = "0x7ce438bf068c8f47f0f46cb7891fc7fd0956f117"
       const zora_api_url = "https://api.zora.co/graphql?query=";
 
-      query = JSON.stringify({
+      const query = JSON.stringify({
         query: `query NFTs {
           tokens(
             networks: [{network: ETHEREUM, chain: MAINNET}]
@@ -371,12 +380,12 @@
 
         // let contractList = []
         // let contractDict = {}
-        // let brokenNFTs = []
-        res.data.tokens.nodes.forEach(token => {
+        let brokenNFTs = []
+        res.data.tokens.nodes.forEach(async (token, index) => {
           
           const nft = token.token
 
-          if (nft.collectionAddress in banned_eth_contracts) return 
+          if (banned_eth_contracts.includes(nft.collectionAddress)) return
           // contractDict[nft.collectionAddress] = nft
           // contractList.push(nft.collectionAddress)
 
@@ -427,7 +436,7 @@
           
 
           const name = nft.name
-          const artist_name = nft.mintInfo ? nft.mintInfo.originatorAddress : ''
+          let artistName = nft.mintInfo ? nft.mintInfo.originatorAddress : ""
           const creation_date = nft.mintInfo ? new Date(nft.mintInfo.mintContext.blockTimestamp).getFullYear() : ''
 
           // para winter solstice
@@ -442,31 +451,32 @@
           }
           
 
-          if(artist_name == ethAddress & nft.metadata) {
-            console.log(nft.metadata)
-          } 
+          // console.log(artistName, ethAddress)
+          // const artistNameNormalized = artistName.substr(0, artistName.indexOf("<")).trim();
+          if(artistName === ethAddress) {
+            artistName = changeArtistName(nft)
+            // console.log(artistName)
+          }
 
+          // if(artistName) {
+          //   // const mainnetProvider = new ethers.providers.JsonRpcProvider("https://eth-mainnet-public.unifra.io");
+          //   possibleName = await provider.lookupAddress('0x378a29135fdFE323414189f682b061fc64aDC0B3');
+          //   console.log(possibleName)
+          //   if(possibleName) artistName = possibleName
+          // }
 
           if (img_url) {
-
-            if (img_url.includes('arweave')) {
-              // console.log(nft)
-              // console.log(nft.name)
-              // console.log(type)
-              
-            }
-
-            doCard(img_url, type, name, artist_name, creation_date, grid)
+            doCard(img_url, type, name, artistName, creation_date, grid, 'eth', index)
           }
 
 
           // // guardar tipo de metadata
-          // if(!name || !artist_name || !creation_date || !img_url || !type) {
+          // if(!name || !artistName || !creation_date || !img_url || !type) {
           //   if(nft.metadata) {
           //     const brokenNFT = {
           //     collectionAddress: nft.collectionAddress,
           //     name: name,
-          //     artist_name: artist_name,
+          //     artistName: artistName,
           //     creation_date: creation_date,
           //     img_url: img_url,
           //     type: type,
@@ -488,6 +498,20 @@
     }
 
 
+    function changeArtistName(nft) {
+
+      let artistName = nft.collectionAddress
+      // if(nft.name.includes('Pooly')) {console.log(nft); artistName = 'Pooly'; return artistName}
+      // if(nft.collectionAddress == '0x76dcaaf781cf28aa7fc7a4afbb919068936b7b35') {console.log(nft); artistName = nft.metadata.created_by; return artistName}
+      // if(nft.collectionAddress == '0xd4a6669e4787f23a2f711e0b6c6fb5431ce1594e') {
+      //   console.log(nft); 
+      //   artistName = nft.metadata.attributes.find(obj => obj.trait_type == 'Artist').value
+      //   return artistName
+      // }
+      return artistName
+    }
+
+
     function download(content, fileName, contentType) {
       var a = document.createElement("a");
       var file = new Blob([content], {type: contentType});
@@ -505,28 +529,41 @@
       const url = tezos_url + query
       
 
-      await fetch(url).then(function(response) {
+      let addresses = {}
+      await fetch(url)
+      .then(response => {
         return response.json();
-      }).then(function(data) {
+      })
+      .then(async data => {
         
         // console.log(data)
         for (let i = 0; i < data.length; i++) {
 
-          creation_date = new Date(data[i]['firstTime']).getFullYear()
-          token = data[i]['token']
-          meta = token['metadata']
+          const creation_date = new Date(data[i]['firstTime']).getFullYear()
+          const token = data[i]['token']
+          const meta = token['metadata']
           if (meta) {
 
-            token_url = meta['artifactUri']
-            artist = meta['creators']
-            name = meta['name']
+            const token_url = meta['artifactUri']
+            const name = meta['name']
 
+            const artist = meta['creators']
+            if(artist in addresses) {
+              addresses[artist].push(i)
+            } else {
+              addresses[artist] = [i]
+            }
+            
+            // const profile = await getTzProfile(meta['creators'])
+            // const artist = profile.exists ? profile.alias : meta['creators']
+            
+            let type = null
             if ('formats' in meta) {
               type = meta['formats'][0]['mimeType']
             } 
             
             if (token_url) {
-              doCard(token_url, type, name, artist, creation_date, grid)
+              doCard(token_url, type, name, artist, creation_date, grid, 'tezos', i)
             }
           }
           
@@ -535,6 +572,43 @@
       }).catch(function(err) {
         console.log(err);
       });
+
+      return addresses
+
+    }
+
+
+    async function getTzProfile(address) {
+
+      const url = `https://api.tzprofiles.com/${address}` 
+
+      let profile = {exists: false, alias: ''}
+
+      if(!address) return profile
+
+      return await fetch(url)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+
+        data.forEach((x) => {
+            const obj = JSON.parse(x[1])
+            const context = obj['@context'][1]
+            const credentialSubject = obj['credentialSubject']
+
+            if (typeof context != 'string') {
+              if ('website' in context) {
+                profile.alias = credentialSubject['alias']
+                profile.exists = true
+              }
+            }
+          
+          })
+
+        return profile
+
+      })
 
     }
 
@@ -557,7 +631,7 @@
     }
 
 
-    function doCard(url, type, name, artist, creation_date, $grid) {
+    function doCard(url, type, name, artist, creation_date, $grid, network, index) {
   
       const gridItem = document.createElement("div");
       gridItem.className = "grid-item";
@@ -579,7 +653,8 @@
 
       const text = document.createElement("p");
 		  text.className = "card-text";
-      text.textContent = artist     
+      text.textContent = artist 
+      text.setAttribute('id', `${network}${index.toString()}`)    
 	
       const date = document.createElement("p");
 		  date.className = "card-text";
@@ -665,11 +740,29 @@
 
 
     // get eth nfts
-    // getMoralis($grid)
     getZora($grid)
 
     // get tezos nfts
-    getTezos($grid)
+    const artistAddresses = getTezos($grid)
+
+    // TODO
+    console.log(artistAddresses)
+    // for(let address of artistAddresses.keys()) {
+
+    //   console.log(address)
+    //   const profile = await getTzProfile(address)
+    //   if(profile.exists) {
+
+    //     for(index in artistAddresses[address]) {
+    //       const artistEl = document.getElementById(`tezos${index.toString()}`)
+    //       console.log(artistEl)
+    //       text.textContent = profile.alias
+    //     }
+        
+    //   }
+    //   const artist = profile.exists ? profile.alias : meta['creators']
+
+    // }
 
     // layout Masonry after each image loads
     $grid.imagesLoaded().progress( function() {
