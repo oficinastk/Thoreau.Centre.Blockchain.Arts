@@ -321,7 +321,12 @@
         '0x61a9ea5ec7406b0cc34e9ac19bf90e204e4898d3',
         '0x92b971d307ebfc7331c23429e204a5e4adf7a833',
         '0x61d38d44e6c2397e4316018144911a77021104a6',
-        '0xdbbf1b941e5864e8fdb4f6e0b309ae2ec9459bbf'
+        '0xdbbf1b941e5864e8fdb4f6e0b309ae2ec9459bbf',
+        '0xb5833ba237fd1589c52129f713e5d93989c634b2',
+        '0xa4c3c0dd20edc3962d1ca1f19a1b48507c331a12',
+        '0x94d3e8ea9b76e99e3de52c41823c56eb03c000e7',
+        '0x81dc9934094b65b704ba9388c27089dbe2c5fb6e',
+        '0xd851fbd96d16d6b818c622cbc23e4197adce4058'
       ]
 
       const ethAddress = "0x7ce438bf068c8f47f0f46cb7891fc7fd0956f117"
@@ -385,6 +390,8 @@
           
           const nft = token.token
 
+          // if(nft.name.includes('Fortune')) {console.log(nft)}
+
           if (banned_eth_contracts.includes(nft.collectionAddress)) return
           // contractDict[nft.collectionAddress] = nft
           // contractList.push(nft.collectionAddress)
@@ -427,6 +434,7 @@
 
           // para OG:crystal
           if(img_url) {
+            // if(type.includes('text')) {console.log(nft)}
             if(img_url.includes('animation') & !type) {
               type = 'video'
             }
@@ -651,6 +659,14 @@
 		  title.className = "card-title";
       title.textContent = name
 
+      const artistUrl = document.createElement("a")
+      artistUrl.setAttribute('target', '_blank') 
+      if(network == 'eth') {
+        artistUrl.setAttribute('href', `https://etherscan.io/address/${artist}`) 
+      } else {
+        artistUrl.setAttribute('href', `https://tzkt.io/${artist}`) 
+      }  
+
       const text = document.createElement("p");
 		  text.className = "card-text";
       text.textContent = artist 
@@ -672,7 +688,8 @@
       card.appendChild(cardBody)
       cardBody.appendChild(div)
       div.appendChild(title)
-      div.appendChild(text)
+      div.appendChild(artistUrl)
+      artistUrl.appendChild(text)
       div.appendChild(date)
 
       card.appendChild(a_el)
