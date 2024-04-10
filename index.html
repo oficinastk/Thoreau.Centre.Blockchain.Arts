@@ -164,11 +164,11 @@
         .then(newResponse => {
           // console.log(newResponse)
           console.log(newResponse)
-          const response = [...previousResponse, ...newResponse['result']]; // Combine the two arrays
+          const response = [...previousResponse, ...newResponse['tokens']]; // Combine the two arrays
 
-          if (newResponse['hasNextPage']) {
+          if (newResponse['continuation']) {
             
-            params.set('cursor', newResponse['hasNextPage'])
+            params.set('continuation', newResponse['continuation'])
             console.log(params.toString())
             return paginated_fetch(url, params, myHeaders, response);
 
@@ -295,6 +295,174 @@
     //   }
 
     // }
+
+
+    const banned_eth_contracts = [
+        '0xdfa1b0e237ab8b5a014e5180cba68ac19accc2bf',
+        '0x61a9ea5ec7406b0cc34e9ac19bf90e204e4898d3',
+        '0x92b971d307ebfc7331c23429e204a5e4adf7a833',
+        '0x61d38d44e6c2397e4316018144911a77021104a6',
+        '0xdbbf1b941e5864e8fdb4f6e0b309ae2ec9459bbf',
+        '0xb5833ba237fd1589c52129f713e5d93989c634b2',
+        '0xa4c3c0dd20edc3962d1ca1f19a1b48507c331a12',
+        '0x94d3e8ea9b76e99e3de52c41823c56eb03c000e7',
+        '0x81dc9934094b65b704ba9388c27089dbe2c5fb6e',
+        '0xd851fbd96d16d6b818c622cbc23e4197adce4058'
+      ]
+
+
+    const ethAddress = "0x7ce438bf068c8f47f0f46cb7891fc7fd0956f117"
+      
+    async function getEth(grid) {
+
+      const options = {method: 'GET', headers: {accept: '*/*', 'x-api-key': 'e544a27a-a796-516c-ad86-3e89ef61e126'}};
+
+      const userAddress = '0x7ce438bf068c8f47f0f46cb7891fc7fd0956f117'
+      const url = `https://api.reservoir.tools/users/${userAddress}/tokens/v7?`
+
+      const params = new URLSearchParams({
+        excludeSpam: true,
+        limit: 200
+      })
+
+      paginated_fetch(url, params, options, []).then(assets => {
+        console.log(assets)
+
+        assets.forEach(async (token, index) => {
+          
+          const nft = token.token
+
+          // if(nft.name.includes('Fortune')) {console.log(nft)}
+
+          if (banned_eth_contracts.includes(nft.contract)) return
+          // contractDict[nft.collectionAddress] = nft
+          // contractList.push(nft.collectionAddress)
+
+          let img_url = null
+          let type = null
+          if (nft.metadata) {
+            if (nft.metadata.mediaOriginal) {
+              img_url = nft.metadata.mediaOriginal
+              type = nft.metadata.imageMimeType
+            } else if(nft.metadata.imageOriginal) {
+              img_url = nft.metadata.imageOriginal
+              type = nft.metadata.imageMimeType
+            }
+          }
+
+          // if (!img_url && nft.image) {
+          //   if (nft.image.url) {
+          //     img_url = nft.image.url
+          //     type = nft.image.mimeType
+          //   }
+          // }
+
+          // if((!img_url) && nft.metadata) {
+
+          //   if('imgUrl' in nft.metadata) {
+          //     img_url = nft.metadata.imgUrl
+          //   }
+
+          //   if('imageUrl' in nft.metadata) {
+          //     img_url = nft.metadata.imageUrl
+          //   }
+
+          //   if(nft.metadata.image) {
+          //     img_url = nft.metadata.image
+          //   }
+
+          //   if(nft.metadata.url) {
+          //     img_url = nft.metadata.url
+          //   }
+
+          // }
+
+          // para OG:crystal
+          if(img_url) {
+            // if(type.includes('text')) {console.log(nft)}
+            if(img_url.includes('animation') & !type) {
+              type = 'video'
+            }
+          }
+          
+
+          
+
+          const name = nft.name
+          let artistName = nft.mintInfo ? nft.mintInfo.originatorAddress : ""
+          const creation_date = nft.createdAt ? new Date(nft.createdAt).getFullYear() : ''
+
+          // para winter solstice
+          if(name) {
+            if(name.includes('Solstice') & !type) {
+              type = 'video'
+            }
+
+            if(name.includes('Pope')) {
+              type = 'image'
+            }
+          }
+          
+
+          // console.log(artistName, ethAddress)
+          // const artistNameNormalized = artistName.substr(0, artistName.indexOf("<")).trim();
+          if(artistName === ethAddress) {
+            artistName = changeArtistName(nft)
+            // console.log(artistName)
+          }
+
+          // if(artistName) {
+          //   // const mainnetProvider = new ethers.providers.JsonRpcProvider("https://eth-mainnet-public.unifra.io");
+          //   possibleName = await provider.lookupAddress('0x378a29135fdFE323414189f682b061fc64aDC0B3');
+          //   console.log(possibleName)
+          //   if(possibleName) artistName = possibleName
+          // }
+
+          if (img_url) {
+            doCard(img_url, type, name, artistName, creation_date, grid, 'eth', index)
+          }
+
+
+          // // guardar tipo de metadata
+          // if(!name || !artistName || !creation_date || !img_url || !type) {
+          //   if(nft.metadata) {
+          //     const brokenNFT = {
+          //     collectionAddress: nft.collectionAddress,
+          //     name: name,
+          //     artistName: artistName,
+          //     creation_date: creation_date,
+          //     img_url: img_url,
+          //     type: type,
+          //     metadata: nft.metadata
+          //   }
+          //   brokenNFTs.push(brokenNFT)
+          //   }
+          // }
+
+          
+        });
+      })
+      // const response = await fetch(url, options)
+      //   .then(response => response.json())
+      //   .then(response => console.log(response))
+      //   .catch(err => console.error(err));
+
+      // Default options are marked with *
+      // const response = await fetch(url, {
+      //   method: "GET", // *GET, POST, PUT, DELETE, etc.
+      //   // mode: "cors", // no-cors, *cors, same-origin
+      //   // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      //   // credentials: "same-origin", // include, *same-origin, omit
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     // 'Content-Type': 'application/x-www-form-urlencoded',
+      //   },
+      //   redirect: "follow", // manual, *follow, error
+      //   referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      //   body: JSON.stringify(data), // body data type must match "Content-Type" header
+      // });
+      // return response.json(); // parses JSON response into native JavaScript objects
+    }
 
 
     async function getZora(grid) {
@@ -757,7 +925,8 @@
 
 
     // get eth nfts
-    getZora($grid)
+    // getZora($grid)
+    getEth($grid)
 
     // get tezos nfts
     const artistAddresses = getTezos($grid)
